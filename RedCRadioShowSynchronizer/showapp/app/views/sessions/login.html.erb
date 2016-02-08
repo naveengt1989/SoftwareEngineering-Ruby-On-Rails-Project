@@ -1,0 +1,129 @@
+<% @page_title = "UserAuth | Login" -%>
+<% if flash[:error] %>
+	<div id="error_explanation">
+     		<ul> <%= flash[:error] %> </ul>
+	</div>
+<% end %>
+
+
+
+
+<!-- <div class="page-header"> -->
+	<div class= "Sign_Form">
+    <h1 style="margin-left:420px;">Radio Show Clock Timer</h1>
+</div>
+<%= javascript_tag do %>
+
+jQuery(document).ready(function($) {
+
+  if (window.history && window.history.pushState) {
+
+    window.history.pushState('forward', null, './');
+
+    $(window).on('popstate', function() {
+      alert('User Logged out...Please Log in to continue');
+    });
+
+  }
+});
+
+   <% end %>     
+
+<!-- Registration Form - START -->
+ <div class="container" id="container1">
+        <div class="row centered-form">
+            <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+                <div class="panel panel-default">
+                    <!-- <div class="panel-heading">
+                        <h3 class="panel-title text-center">Please Register</h3>
+                    </div> -->
+                    <div class="panel-body">
+                    	<%= form_tag(:action => 'login_attempt') do %>
+                            <div class="form-group">
+                            	
+                                <!-- <input type="LABEL" name="first_name" id="Username" class="form-control input-sm" placeholder="First Name"> -->
+                               <p>Username:	<%= text_field_tag(:username_or_email) %></p>
+                            </div>
+
+         
+
+                            <!-- <div class="row"> -->
+                                <!-- <div class="col-xs-6 col-sm-6 col-md-6"> -->
+                                    <div class="form-group">
+                                        <!-- <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password" VALUE> -->
+                                       <p>Password:	<%= password_field_tag :login_password %></p>
+                                    </div>
+                                <!-- </div> -->
+                                
+                            <!-- </div> -->
+
+                            <input type="submit" value="Login" class="btn btn-info btn-block" >
+                            <!-- <%= submit_tag("Login") %> -->
+
+                            
+                             <!-- <input type="submit" value="SignUp" class="btn btn-info btn-block" onclick="new_user_path" > -->
+                            <%= link_to 'SignUp', new_user_path %>
+                        <!-- <form role="form">
+                        	<%= form_tag(:action => 'login_attempt') do %>
+                            <div class="form-group">
+                            	
+                                <input type="LABEL" name="first_name" id="Username" class="form-control input-sm" placeholder="First Name">
+                                <%= text_field_tag(:username_or_email) %>
+                            </div>
+
+         
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <!-- <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password" VALUE> -->
+                                        <!-- <%= password_field_tag :login_password %>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <input type="submit" value="Register" class="btn btn-info btn-block" >
+                            <%= submit_tag("Login") %>
+                            <% end %>
+                        </form> --> 
+                        <% end %>
+                    </div>
+                    
+
+                </div>
+            </div>
+        </div>
+
+  
+ 
+        
+        
+        <style>
+#container1 {
+    /*background-color: #d3cfff;*/
+}
+
+.centered-form {
+    margin-top: 120px;
+    margin-bottom: 100px;
+    margin-right: 120px;
+    
+}
+
+.centered-form .panel {
+    background: rgba(255,255, 255, 0.7);
+    box-shadow: rgba(0, 0, 0, 0.3) 5px 15px 10px;
+   
+}
+h1{
+	color:#EBEBEB;
+	
+}
+</style>
+<!-- Registration Form - END -->
+
+</div>
+
+</body>
+</html>

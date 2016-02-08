@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ShowApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  
+  <%= csrf_meta_tags %>
+</head>
+<!-- <p>  <%= link_to " Logout", :controller=> "sessions", :action=> "logout" %></p>  -->
+<% if !@current_user.nil? %>
+<!-- <p>Hi <%= @current_user.hostName %>,  </p> -->
+<% end%>
+<body>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= yield %>
+</body>
+</html>

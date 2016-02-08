@@ -1,0 +1,105 @@
+
+	<% @radio_show = Array.new{Array.new};%>
+<% @radio_shows.each do |radio_show_instance| %>
+	<%radio_show_instance.show_timings.each do |show_timing|%>
+	<%	@radio_show.push( [radio_show_instance, show_timing.startTime.hour, show_timing.startTime.min, show_timing.startTime.sec, show_timing.endTime.hour,
+		 show_timing.endTime.min, show_timing.endTime.sec, show_timing.segment_name]); %>
+	<% end%>
+<% end%>
+<%  @radio_show = @radio_show.sort_by {|e| [e[1],e[2],e[3]]} %>
+
+<% if defined?(@current_user.timeServer) %>
+<% Time.zone = @current_user.timeServer; %>
+<% end%>
+
+<%  time = Time.zone.now %>
+<%  cur_time = Time.at(time.hour * 60 * 60 + time.min * 60 + time.sec)%>
+
+<% @event_count  = 0 %>
+<ol id="navlist2" height="1em" >
+<% @past_events = Array.new{Array.new};%>
+<% @radio_show.reverse_each do |show| %>
+	<%  start_time = Time.at(show[1] * 60 * 60 + show[2] * 60 + show[3])%>
+	<%  end_time = Time.at(show[4] * 60 * 60 + show[5] * 60 + show[6])%>
+  <%  if ( cur_time > end_time) %>
+    <% @past_events.push([show[0], show[7]]) %>
+    <% @event_count = @event_count + 1 %>
+    <% if ( @event_count == 4) %>
+        <% break; %>
+    <% end %>
+  <!--<li id =elapsed><%= link_to show[0].name, show[0] %></li>-->
+  <%end%>
+<% end%>
+
+<% @past_events.reverse_each do |ev| %>
+  <li id =elapsed><%= link_to ev[0].name+" - "+ev[1] , ev[0] %></li>
+<% end %>
+</ol>
+
+<ol id="curlist" height="3em">
+	<% found_current = false %>
+<% @radio_show.each do |show| %>
+	<%  start_time = Time.at(show[1] * 60 * 60 + show[2] * 60 + show[3])%>
+	<%  end_time = Time.at(show[4] * 60 * 60 + show[5] * 60 + show[6])%>
+	<% if ((cur_time >= start_time) && (cur_time <= end_time))%>
+		<% found_current = true %>
+		<% time_remaining_hours = ((end_time-cur_time)/3600).to_i%>
+		<% time_remaining_minutes = ((end_time-cur_time-time_remaining_hours*3600)/60).to_i%>
+		<% time_remaining_seconds = ((end_time-cur_time)%60).to_i%>
+		
+		
+		<% if ((end_time-cur_time) <= @current_user.flashTime)  %>
+		
+        <!-- div id="flash">blink</div> -->
+        
+       		<li id = upcoming_soon><div class="row"><div class="col-md-4"></div><div class="col-md-4"><%= link_to show[0].name+" - "+show[7] , show[0] %></div> <div class="col-md-4"><%= sprintf('%02d',(time_remaining_hours)) + ":" + sprintf('%02d',(time_remaining_minutes)) + ":" + sprintf('%02d',(time_remaining_seconds)) %></div></div></div></li>
+	 <% else%>
+			<li id =current><div class="row"><div class="col-md-4">On Air:</div><div class="col-md-4"><%= link_to show[0].name+" - "+show[7] , show[0] %></div> <div class="col-md-4"><%= sprintf('%02d',(time_remaining_hours)) + ":" + sprintf('%02d',(time_remaining_minutes)) + ":" + sprintf('%02d',(time_remaining_seconds)) %></div></div></li>
+	
+	   <% end %>
+	
+		
+	<%end%>
+<% end%>
+	<% if found_current == false%>
+		<li id =current>BREAK</li>
+	<%end%>
+	
+</ol>
+
+<% @event_count = 0 %>
+<!-- <ol id="navlist3" height="3em" > -->
+	<% @post_events = Array.new{Array.new};%>
+<% @radio_show.each do |show| %>
+	<%  start_time = Time.at(show[1] * 60 * 60 + show[2] * 60 + show[3])%>
+	<%  end_time = Time.at(show[4] * 60 * 60 + show[5] * 60 + show[6])%>
+	<% if (cur_time < start_time)%>
+		<% time_remaining_hours = ((start_time-cur_time)/3600).to_i%>
+		<% time_remaining_minutes = ((start_time-cur_time-time_remaining_hours*3600)/60).to_i%>
+		<% time_remaining_seconds = ((start_time-cur_time)%60).to_i%>
+		 
+		<% @event_count = @event_count + 1 %>
+
+    	<% if @event_count == 1%>
+    		<ol id="navlist3" height="3em" >
+        		<li id = upcoming><div class="row"><div class="col-md-4">Upcoming:</div><div class="col-md-4"><%= link_to show[0].name+" - "+show[7] , show[0] %></div> <div class="col-md-4"><%= sprintf('%02d',(time_remaining_hours)) + ":" + sprintf('%02d',(time_remaining_minutes)) + ":" + sprintf('%02d',(time_remaining_seconds)) %></div></div></li>
+	  		</ol>
+	  	<% else %>
+	  
+	  		<% @post_events.push([show[0],show[7]]) %>
+    	<% end %>
+	  
+    <% if @event_count == 4 %>
+       <% break %>
+    <% end %>
+	
+		<!-- <li id = upcoming><%= link_to show[0].name+" [[ UP IN "+time_remaining_hours.to_s + " HOURS " + time_remaining_minutes.to_s + " MINUTES " + time_remaining_seconds.to_s + " SECONDS ]]", show[0] %></li> -->
+	<%end%>
+<% end%>
+
+<ol id="navlist4" height="3em" >
+<% @post_events.each do |ev| %>
+	<li id = upcoming_next><div class="row"><%= link_to ev[0].name+" - "+ev[1], ev[0] %></div></li>
+<%end%>    
+</ol> 
+

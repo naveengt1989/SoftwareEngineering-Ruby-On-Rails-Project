@@ -1,0 +1,5 @@
+.....................................................
+
+Finished in 1.12 seconds (files took 12.88 seconds to load)
+53 examples, 0 failures
+C:/Ruby193/bin/ruby.exe -I'C:/Ruby193/lib/ruby/gems/1.9.1/gems/rspec-core-3.1.7/lib';'C:/Ruby193/lib/ruby/gems/1.9.1/gems/rspec-support-3.1.2/lib' C:/Ruby193/lib/ruby/gems/1.9.1/gems/rspec-core-3.1.7/exe/rspec --pattern 'spec/**{,/*/**}/*_spec.rb'

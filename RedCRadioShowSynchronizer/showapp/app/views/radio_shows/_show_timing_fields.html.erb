@@ -1,0 +1,20 @@
+<div class="nested-fields well">
+  <div class="field">
+        <%= f.label :segment_name %><br>
+        <%= f.text_field :segment_name, :size => "25" %>
+    </div>
+	<div class="field">
+    		<%= f.label :day %><br>
+    		<%= f.select :day, ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] %>
+  	</div>
+	<div class="field">
+    		<%= f.label :startTime %><br>
+        <%= f.time_select :startTime, :include_seconds => true %>
+  	</div>
+	<div class="field">
+    		<%= f.label :endTime %><br>
+        <%= f.time_select :endTime, :include_seconds => true %>
+  	</div>
+	<%= link_to_remove_association "Remove Show Timing", f %>
+</div>
+

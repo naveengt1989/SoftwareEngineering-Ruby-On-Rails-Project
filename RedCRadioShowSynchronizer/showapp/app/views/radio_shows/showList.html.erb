@@ -1,0 +1,94 @@
+<!-- <div class="panel panel-default"> -->
+                    <!-- <div class="panel-heading">
+                        <h3 class="panel-title text-center">Please Register</h3>
+                    </div> -->
+                    <!-- <div class="panel-body"> -->
+<div class="container" id="container2">
+
+  
+  <% @radio_shows_list.each do |radio_show| %>
+<!-- <div class="container" id="container3"> -->
+<p>
+  <strong>Name:</strong>
+  <%= radio_show.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= radio_show.description %>
+</p>
+
+<!-- <table class="table table-striped" width="300px">
+  <thead> -->
+  	<table class="table table-stripped">
+  	<thead class="table table-stripped">
+    <tr>
+      <td><strong>Segment Name</strong></td>  
+      <td><strong>Show Day</strong></td>
+      <td><strong>Show Start Time</></td>
+      <td><strong>Show End Time</></td>
+    </tr>
+  </thead>
+
+  <tbody class="table table-stripped">
+<%radio_show.show_timings.each do |show_timing|%>
+    <tr>
+       <td><%= show_timing.segment_name %></td>
+       <td><%= show_timing.day %></td>
+        <td><%= show_timing.startTime.strftime("%r") %></td>
+        <td><%= show_timing.endTime.strftime("%r") %></td>
+      </tr>
+      
+<%end%>
+
+</tbody>
+
+</table>
+
+
+<p ><%= link_to 'Edit', edit_radio_show_path(radio_show) %> |
+<%=  link_to 'Destroy', radio_show, method: :delete, data: { confirm: 'Are you sure?' }  %> </br></p>
+
+	<div class="line-separator"></div>
+  <% end %>
+  
+ 
+<!-- </table> -->
+  
+  </div>
+<!-- </div> -->
+
+<style>
+#container2 {
+    background: rgba(255,255, 255, 0.6);
+    box-shadow: rgba(0, 0, 0, 0.3) 10px 10px 10px;
+   width: 500px;
+   color:blue;
+   
+   /*height:500px;*/
+   overflow-y: scroll;
+   margin-top :0%;
+
+}
+/*#container3 {
+    background: rgba(255,255, 255, 0.6);
+    box-shadow: rgba(0, 0, 0, 0.3) 10px 10px 10px;
+   /*width: 500px;*/
+   border-color: black;
+   
+   
+   /*height:500px;*/
+   overflow-y: auto;
+   margin-top :0%;
+
+}*/
+.line-separator{
+	height:1px;
+	color:#FFFFFF
+	background:#717171;
+	border-bottom: 1px solid #313030;
+}
+
+
+</style>
+

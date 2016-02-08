@@ -1,0 +1,77 @@
+<div class="panel panel-default">
+                    <!-- <div class="panel-heading">
+                        <h3 class="panel-title text-center">Please Register</h3>
+                    </div> -->
+                    <div class="panel-body">
+<!-- <h1>Listing radio_shows</h1> -->
+<h1>View Show List</h1>
+
+ <form role="form">
+        <div class="form-group">
+          <label for="sel1">Select list (select one):</label>
+          <select class="form-control" id="showType" onchange= "loadShowEvent()">
+       <option value="showByDay" selected="selected">Show By Show Day</option>
+           <option value="showByName" >Show By Show Name</option>
+          </select>
+          <br>
+          
+        
+
+
+
+
+<!-- <select id="showType" onchange= "loadShowEvent()">
+<option value="showByDay" selected="selected">Show By Show Day</option>
+<option value="showByName" >Show By Show Name</option>
+</select> -->
+
+<div class="showEventDay" id="showEventDay" style="font:20px bold" text-align="center">
+	<select class="form-control" id="showDay" onchange= "loadShowForDay()"  >
+	<option value="Select" selected="selected">Select Day</option>
+	<option value="Sunday" >Sunday</option>
+	<option value="Monday">Monday</option>
+	<option value="Tuesday">Tuesday</option>
+	<option value="Wednesday">Wednesday</option>
+	<option value="Thursday">Thursday</option>
+	<option value="Friday">Friday</option>
+	<option value="Saturday">Saturday</option>
+	</select>
+
+	<div class="showsForDay" >
+	</div>
+
+	<br>
+
+</div>
+
+
+<div class="showEventName" id="showEventName" style="font:25px bold" text-align="center" hidden=true>
+	<select  class="form-control"  id="showName" onchange= "loadShowForName()" >
+	<option value="Select" selected="selected">Select Name</option>
+	<% @radio_shows.each do |radio_show| %>
+	<option value="<%= radio_show.id%>" ><%= radio_show.name%></option>
+	<% end %>
+	</select>
+
+	<div class="showsForName" >
+	</div>
+
+	<br>
+</div>
+  
+        </div>
+      </form>
+
+<br>
+
+<%= link_to 'New Radio show',new_radio_show_path ,:class =>"btn btn-default btn-sm" %>
+</div>
+</div>
+<style>
+.panel {
+    background: rgba(255,255, 255, 0.6);
+    box-shadow: rgba(0, 0, 0, 0.3) 10px 10px 10px;
+   width: 700px;
+
+}
+</style>

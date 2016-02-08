@@ -1,0 +1,60 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :userName %><br>
+    <%= f.text_field :userName , :size =>"40" %>
+  </div>
+  <div class="field">
+    <%= f.label :hostName %><br>
+    <%= f.text_field :hostName , :size =>"40" %>
+  </div>
+  <div class="field">
+    <%= f.label :emailAddress %><br>
+    <%= f.text_field :emailAddress , :size =>"40" %>
+  </div>
+  <div class="field">
+    <%= f.label :timeServer %><br>
+    <%= f.select :timeServer, ["Pacific Time (US & Canada)", "Mountain Time (US & Canada)", "Eastern Time (US & Canada)", "Central Time (US & Canada)"] %>
+  </div>
+  <% if @user.nil? %>
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.password_field :password  , :size =>"40"%>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation, :size =>"40"%>
+  </div>
+  <% else%>
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.password_field :password, :value => @user.password, :size => "40" %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation, :value => @user.password, :size => "40" %>
+  </div>
+  <% end%>
+  <div class="field">
+    <%= f.label :location %><br>
+    <%= f.text_field :location , :size =>"40" %>
+  </div>
+  <div class="field">
+    <%= f.label :flashTime %><br>
+    <%= f.select :flashTime, [5, 10, 20, 30] %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save & Continue"%>
+  </div>
+<% end %>

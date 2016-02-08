@@ -1,0 +1,14 @@
+<tbody>
+      <tr>
+	<% if style == "byName" %>
+        <td><%= radio_show.name %></td>
+        <td><%= radio_show.description %></td>
+        <td><%= link_to 'Show', radio_show %></td>
+        <td><%= link_to 'Edit', edit_radio_show_path(radio_show) %></td>
+        <td><%= link_to 'Destroy', radio_show, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<% else %>
+        <td> Invalid style</td>
+	<% end %>
+      </tr>
+  </tbody>
+
