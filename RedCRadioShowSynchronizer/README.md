@@ -1,4 +1,4 @@
-ShowClockTimer
+Radio Show Scheduler App
 ==============
 
 CSCE-606-Software Engineering Project - Radio Show Scheduler App tailored to custom requirements for Customer - Red C - Catholic Radio Station
