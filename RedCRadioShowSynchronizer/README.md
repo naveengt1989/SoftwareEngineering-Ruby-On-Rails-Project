@@ -1,7 +1,7 @@
 ShowClockTimer
 ==============
 
-CSCE-606-Software Engineering Project - Display clock timer for Customer - Red C - Catholic Radio Station
+CSCE-606-Software Engineering Project - Radio Show Scheduler App tailored to custom requirements for Customer - Red C - Catholic Radio Station
 
 Basic Git Setup
 
